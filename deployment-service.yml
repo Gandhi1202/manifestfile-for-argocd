@@ -2,38 +2,37 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
- name: gametetrisbdeploy
+  name: gametetrisbdeploy
 spec:
- replicas: 2
- strategy: 
-  type: RollingUpdate
-  rollingUpdate:
-	  maxUnavailable: 50%
-	  maxSurge: 1 # ensure that we don't have more than 3 pod replicas
- selector:
-  matchLabels:
-   app: tetris
- template:
-   metadata:
-    name: gamedeployement
-    labels:
-     app: tetris
-   spec:
-   	containers:
-   	- name: tiergame
-   	  image: shaikmustafa/mytetrisgame:v1
-   	  ports:
-   	  	- containerPort: 3000
+  replicas: 2
+  strategy: 
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 50%
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: tetris
+  template:
+    metadata:
+      name: gamedeployement
+      labels:
+        app: tetris
+    spec:
+      containers:
+      - name: tiergame
+        image: shaikmustafa/mytetrisgame:v1
+        ports:
+        - containerPort: 3000
 ---
 apiVersion: v1
 kind: Service
 metadata:
- name: gameservice
+  name: gameservice
 spec:
- type: LoadBalancer
- selector:
-  app: tetris
- ports:
+  type: LoadBalancer
+  selector:
+    app: tetris
+  ports:
   - port: 80
     targetPort: 3000
-...
