@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: tiergame
-        image: shaikmustafa/mytetrisgame:v1
+        image: shaikmustafa/mytetrisgame:v2
         ports:
         - containerPort: 3000
 ---
